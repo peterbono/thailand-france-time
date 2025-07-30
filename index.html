@@ -80,7 +80,7 @@
 </head>
 <body>
   <header>
-    Current Time in Thailand and France
+    Current Time in Thailand, France and Canada
   </header>
   <main class="container">
     <div class="time-box">
@@ -90,6 +90,10 @@
     <div class="time-box">
       <h2>France (Paris)</h2>
       <p id="france-time">--:--:--</p>
+    </div>
+    <div class="time-box">
+      <h2>Canada (Toronto)</h2>
+      <p id="canada-time">--:--:--</p>
     </div>
   </main>
   <footer>
@@ -113,9 +117,20 @@
         minute: '2-digit',
         second: '2-digit'
       });
+      const canadaFormatter = new Intl.DateTimeFormat('en-US', {
+        // Toronto represents Eastern Time in Canada and will automatically
+        // handle daylight saving time changes. If you wish to use a
+        // different Canadian time zone, replace 'America/Toronto' with
+        // another IANA identifier (e.g. 'America/Vancouver').
+        timeZone: 'America/Toronto',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
       const now = new Date();
       document.getElementById('thailand-time').textContent = bangkokFormatter.format(now);
       document.getElementById('france-time').textContent = parisFormatter.format(now);
+      document.getElementById('canada-time').textContent = canadaFormatter.format(now);
     }
     // initial call
     updateTimes();
